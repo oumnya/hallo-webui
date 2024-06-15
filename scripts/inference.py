@@ -46,6 +46,8 @@ from hallo.models.unet_2d_condition import UNet2DConditionModel
 from hallo.models.unet_3d import UNet3DConditionModel
 from hallo.utils.util import tensor_to_video
 
+# from diffusers.utils.import_utils import is_xformers_available
+
 
 class Net(nn.Module):
     """
@@ -228,10 +230,15 @@ def inference_process(args: argparse.Namespace):
     denoising_unet.requires_grad_(False)
     face_locator.requires_grad_(False)
     audio_proj.requires_grad_(False)
+    
+    # Not working soryy :(
+    # if is_xformers_available():
+    #     reference_unet.enable_xformers_memory_efficient_attention()
+    #     denoising_unet.enable_xformers_memory_efficient_attention()
 
     reference_unet.enable_gradient_checkpointing()
     denoising_unet.enable_gradient_checkpointing()
-
+    
     net = Net(
         reference_unet,
         denoising_unet,
