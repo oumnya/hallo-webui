@@ -21,7 +21,7 @@ def generate_video(ref_img, ref_audio):
     if platform.system() == "Windows":
         command = f"venv\\Scripts\\activate && python scripts\\inference.py --source_image {ref_img} --driving_audio {ref_audio} --output {output_video}"
     else:
-        command = f"source venv/bin/activate && python scripts/inference.py --source_image {ref_img} --driving_audio {ref_audio} --output {output_video}"
+        command = f"python3 scripts/inference.py --source_image {ref_img} --driving_audio {ref_audio} --output {output_video}"
 
     try:
         # Execute the command
