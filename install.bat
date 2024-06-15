@@ -7,7 +7,7 @@ git clone https://huggingface.co/fudan-generative-ai/hallo pretrained_models
 echo Install Depends
 python -m venv venv
 call venv/scripts/activate
-pip install -r requerements.txt
+pip install -r requirements.txt
 pip install -e . 
 
 pip install bitsandbytes-windows --force-reinstall
