@@ -29,6 +29,7 @@ python scripts/inference.py --audio_path audio.wav --image_path image.jpg
 """
 
 import argparse
+import gc
 import os
 
 import torch
@@ -181,6 +182,13 @@ def inference_process(args: argparse.Namespace):
         os.path.join(save_path, "audio_preprocess")
     ) as audio_processor:
         audio_emb = audio_processor.preprocess(driving_audio_path)
+        
+    # Clear memory 
+    # del image_processor
+    del audio_processor
+    gc.collect()
+    torch.cuda.empty_cache()
+    
 
     # 4. build modules
     sched_kwargs = OmegaConf.to_container(config.noise_scheduler_kwargs)
