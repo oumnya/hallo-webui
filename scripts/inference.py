@@ -117,7 +117,7 @@ def process_audio_emb(audio_emb):
 
 
 
-def inference_process(args: argparse.Namespace):
+def inference_process(args: argparse.Namespace, setting_steps=40, setting_cfg=3.5, settings_seed=42, settings_fps=25, settings_motion_pose_scale=1.1, settings_motion_face_scale=1.1, settings_motion_lip_scale=1.1, settings_n_motion_frames=2, settings_n_sample_frames=16):
     """
     Perform inference processing.
 
@@ -130,6 +130,28 @@ def inference_process(args: argparse.Namespace):
     # 1. init config
     config = OmegaConf.load(args.config)
     config = OmegaConf.merge(config, vars(args))
+    
+    
+    if setting_steps is not None:
+        config.inference_steps = setting_steps
+    if setting_cfg is not None:
+        config.cfg_scale = setting_cfg
+    if settings_seed is not None:
+        config.seed = int(settings_seed)
+    if settings_fps is not None:
+        config.data.export_video.fps = settings_fps
+    if settings_motion_pose_scale is not None:
+        config.pose_weight = settings_motion_pose_scale
+    if settings_motion_face_scale is not None:
+        config.face_weight = settings_motion_face_scale
+    if settings_motion_lip_scale is not None:
+        config.lip_weight = settings_motion_lip_scale
+    if settings_n_motion_frames is not None:
+        config.data.n_motion_frames = settings_n_motion_frames
+    if settings_n_sample_frames is not None:
+        config.data.n_sample_frames = settings_n_sample_frames
+    
+    
     source_image_path = config.source_image
     driving_audio_path = config.driving_audio
     save_path = config.save_path
@@ -331,6 +353,13 @@ def inference_process(args: argparse.Namespace):
         audio_tensor = audio_tensor.to(
             device=net.audioproj.device, dtype=net.audioproj.dtype)
         audio_tensor = net.audioproj(audio_tensor)
+        
+        # Get all params
+        print(
+            f"""
+            inference {t+1} / {times}
+            """
+        )
 
         pipeline_output = pipeline(
             ref_image=pixel_values_ref_img,
@@ -380,8 +409,27 @@ if __name__ == "__main__":
         "--face_expand_ratio", type=float, help="face region", default=1.2)
     parser.add_argument(
         "--checkpoint", type=str, help="which checkpoint", default=None)
-
+    parser.add_argument("--setting_steps", type=int, default=40)
+    parser.add_argument("--setting_cfg", type=float, default=3.5)
+    parser.add_argument("--settings_seed", type=int, default=42)
+    parser.add_argument("--settings_fps", type=int, default=25)
+    parser.add_argument("--settings_motion_pose_scale", type=float, default=1.1)
+    parser.add_argument("--settings_motion_face_scale", type=float, default=1.1)
+    parser.add_argument("--settings_motion_lip_scale", type=float, default=1.1)
+    parser.add_argument("--settings_n_motion_frames", type=int, default=2)
+    parser.add_argument("--settings_n_sample_frames", type=int, default=16)
 
     command_line_args = parser.parse_args()
 
-    inference_process(command_line_args)
+    inference_process(
+        command_line_args,
+        command_line_args.setting_steps,
+        command_line_args.setting_cfg,
+        command_line_args.settings_seed,
+        command_line_args.settings_fps,
+        command_line_args.settings_motion_pose_scale,
+        command_line_args.settings_motion_face_scale,
+        command_line_args.settings_motion_lip_scale,
+        command_line_args.settings_n_motion_frames,
+        command_line_args.settings_n_sample_frames
+    )
