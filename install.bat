@@ -3,6 +3,7 @@
 echo clone models
 git lfs install
 git clone https://huggingface.co/fudan-generative-ai/hallo pretrained_models
+powershell -Command "Invoke-WebRequest -Uri 'https://huggingface.co/fudan-generative-ai/hallo/resolve/main/hallo/net.pth?download=true' -OutFile 'pretrained_models/hallo/net.pth'"
 
 echo Install Depends
 python -m venv venv

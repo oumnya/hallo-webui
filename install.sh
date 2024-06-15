@@ -3,6 +3,7 @@
 echo "Clone models"
 git lfs install
 git clone https://huggingface.co/fudan-generative-ai/hallo pretrained_models
+wget -O pretrained_models/hallo/net.pth https://huggingface.co/fudan-generative-ai/hallo/resolve/main/hallo/net.pth?download=true
 
 echo "Install dependencies"
 python3 -m venv venv
