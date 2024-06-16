@@ -11,7 +11,7 @@ Unfortunately, I was unable to create a free tier Colab notebook as there is not
 
 But you can try if you have `pro` [colab](https://colab.research.google.com/drive/1JGkftvdEksrhJbeAUnnRAZNAfZyGjP44?usp=sharing)
 
-If you have windows and you don't want to bother with installing libs, you can download the [portable version](https://huggingface.co/daswer123/portable_webuis/resolve/main/hallo-portable.zip?download=true) , unpack and launch `run.bat`
+If you have windows and you don't want to bother with installing libs, you can download the [portable version](https://huggingface.co/daswer123/portable_webuis/resolve/main/hallo-portable-2.zip?download=true) , unpack and launch `run.bat`
 
 ## Screenshot
 
