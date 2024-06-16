@@ -8,7 +8,7 @@ But you can try if you have `pro` [colab](https://colab.research.google.com/driv
 
 This fork was created to provide a convenient web interface for using Hallo. The original code has been slightly modified to allow for more control over the generation process.
 
-![image](https://github.com/daswer123/hallo-webui/assets/22278673/036c342d-062c-4b38-a62d-2091c2f43fd2)
+![image](https://github.com/daswer123/hallo-webui/assets/22278673/ebd9c9cd-9d37-4772-8d7c-edaf68dbe15b)
 
 ## Installation
 
