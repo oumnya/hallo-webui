@@ -1,14 +1,19 @@
 # About this fork
 
+This fork was created to provide a convenient web interface for using Hallo. The original code has been slightly modified to allow for more control over the generation process.
+
+## About colab
 ⚠️ To run the web interface, you need at least 12 GB of video memory (VRAM) and more than 12 GB of RAM. ⚠️
 
 Unfortunately, I was unable to create a free tier Colab notebook as there is not enough RAM available.
 
+## Portable version
+
 But you can try if you have `pro` [colab](https://colab.research.google.com/drive/1JGkftvdEksrhJbeAUnnRAZNAfZyGjP44?usp=sharing)
 
-If you have windows and you don't want to bother with installing biblioteks, you can download the [portable version](https://huggingface.co/daswer123/portable_webuis/resolve/main/hallo-portable.zip?download=true)
+If you have windows and you don't want to bother with installing libs, you can download the [portable version](https://huggingface.co/daswer123/portable_webuis/resolve/main/hallo-portable.zip?download=true) , unpack and launch `run.bat`
 
-This fork was created to provide a convenient web interface for using Hallo. The original code has been slightly modified to allow for more control over the generation process.
+## Screenshot
 
 ![image](https://github.com/daswer123/hallo-webui/assets/22278673/ebd9c9cd-9d37-4772-8d7c-edaf68dbe15b)
 
@@ -161,7 +166,8 @@ Besides, ffmpeg is also need:
 The inference entrypoint script is `scripts/inference.py`. Before testing your cases, there are two preparations need to be completed:
 
 1. [Download all required pretrained models](#download-pretrained-models).
-2. [Run inference](#run-inference).
+2. [Prepare source image and driving audio pairs](#prepare-inference-data).
+3. [Run inference](#run-inference).
 
 ## Download pretrained models
 
@@ -223,15 +229,33 @@ Finally, these pretrained models should be organized as follows:
     |   `-- vocab.json
 ```
 
+## Prepare Inference Data
+
+Hallo has a few simple requirements for input data:
+
+For the source image:
+
+1. It should be cropped into squares.
+2. The face should be the main focus, making up 50%-70% of the image.
+3. The face should be facing forward, with a rotation angle of less than 30° (no side profiles).
+
+For the driving audio:
+
+1. It must be in WAV format.
+2. It must be in English since our training datasets are only in this language.
+3. Ensure the vocals are clear; background music is acceptable.
+
+We have provided some samples for your reference.
+
 ## Run inference
 
 Simply to run the `scripts/inference.py` and pass `source_image` and `driving_audio` as input:
 
 ```bash
-python scripts/inference.py --source_image your_image.png --driving_audio your_audio.wav
+python scripts/inference.py --source_image examples/source_images/1.jpg --driving_audio examples/driving_audios/1.wav
 ```
 
-Animation results will be saved as `${PROJECT_ROOT}/.cache/output.mp4` by default. You can pass `--output` to specify the output file name.
+Animation results will be saved as `${PROJECT_ROOT}/.cache/output.mp4` by default. You can pass `--output` to specify the output file name. You can find more examples for inference at [examples folder](https://github.com/fudan-generative-vision/hallo/tree/main/examples).
 
 For more options:
 
@@ -264,6 +288,7 @@ options:
 |   ✅   | **[Inference source code meet everyone on GitHub](https://github.com/fudan-generative-vision/hallo)** | 2024-06-15 |
 |   ✅   | **[Pretrained models on Huggingface](https://huggingface.co/fudan-generative-ai/hallo)**              | 2024-06-15 |
 | 🚀🚀🚀 | **[Traning: data preparation and training scripts]()**                                                | 2024-06-25 |
+| 🚀🚀🚀 | **[Optimize inference performance in Mandarin]()**                                                    |    TBD     |
 
 # Citation
 
