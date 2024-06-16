@@ -1,3 +1,84 @@
+# About this fork
+
+⚠️ To run the web interface, you need at least 12 GB of video memory (VRAM) and more than 12 GB of RAM. ⚠️
+
+Unfortunately, I was unable to create a free tier Colab notebook as there is not enough RAM available.
+
+This fork was created to provide a convenient web interface for using Hallo. The original code has been slightly modified to allow for more control over the generation process.
+
+## Installation
+
+### Windows
+
+1. Clone this repository:
+   ```
+   git clone https://github.com/yourusername/hallo.git
+   ```
+
+2. Run `install.bat` to set up the environment and download the pretrained models.
+
+3. Make sure ffmpeg is installed on your system. It doesn't matter where it's located, as long as the system can find it.
+
+4. Launch the web interface by running `start.bat`.
+
+### Linux
+
+1. Clone this repository:
+   ```
+   git clone https://github.com/yourusername/hallo.git
+   ```
+
+2. Run `install.sh` to set up the environment and download the pretrained models.
+
+3. Ensure ffmpeg is installed on your system. You can install it with:
+   ```
+   sudo apt-get install ffmpeg
+   ```
+
+4. Launch the web interface by running `start.sh`.
+
+### Manual Installation
+
+If you prefer to install manually, here are the detailed steps:
+
+1. Clone the repository and pretrained models:
+   ```
+   git lfs install
+   git clone https://github.com/yourusername/hallo.git
+   git clone https://huggingface.co/fudan-generative-ai/hallo pretrained_models
+   curl -L -o pretrained_models/hallo/net.pth https://huggingface.co/fudan-generative-ai/hallo/resolve/main/hallo/net.pth?download=true
+   ```
+
+2. Create a virtual environment and activate it:
+   ```
+   python -m venv venv
+   venv\Scripts\activate  # For Windows
+   source venv/bin/activate  # For Linux
+   ```
+
+3. Install the required packages:
+   ```
+   pip install -r requirements.txt
+   pip install -e .
+   pip install bitsandbytes-windows --force-reinstall  # For Windows only
+   ```
+
+4. Install GPU libraries:
+   ```
+   pip install torch==2.2.2+cu121 torchaudio torchvision --index-url https://download.pytorch.org/whl/cu121
+   pip install onnxruntime-gpu
+   ```
+
+5. Launch the web interface:
+   ```
+   python app.py
+   ```
+
+6. To share , use `--share` flag
+   ```
+    python app.py --share
+   ```
+
 <h1 align='Center'>Hallo: Hierarchical Audio-Driven Visual Synthesis for Portrait Image Animation</h1>
 
 <div align='Center'>
