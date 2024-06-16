@@ -4,6 +4,8 @@
 
 Unfortunately, I was unable to create a free tier Colab notebook as there is not enough RAM available.
 
+But you can try if you have `pro` [colab](https://colab.research.google.com/drive/1JGkftvdEksrhJbeAUnnRAZNAfZyGjP44?usp=sharing)
+
 This fork was created to provide a convenient web interface for using Hallo. The original code has been slightly modified to allow for more control over the generation process.
 
 ![image](https://github.com/daswer123/hallo-webui/assets/22278673/036c342d-062c-4b38-a62d-2091c2f43fd2)
