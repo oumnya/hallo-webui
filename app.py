@@ -5,7 +5,7 @@ from datetime import datetime
 import os
 import platform
 
-def generate_video(ref_img, ref_audio, setting_steps=40, setting_cfg=3.5, settings_seed=42, settings_fps=25, settings_motion_pose_scale=1.1, settings_motion_face_scale=1.1, settings_motion_lip_scale=1.1, settings_n_motion_frames=2, settings_n_sample_frames=16):
+def generate_video(ref_img, ref_audio,settings_face_expand_ratio=1.2, setting_steps=40, setting_cfg=3.5, settings_seed=42, settings_fps=25, settings_motion_pose_scale=1.1, settings_motion_face_scale=1.1, settings_motion_lip_scale=1.1, settings_n_motion_frames=2, settings_n_sample_frames=16):
     # Ensure file paths are correct
     if not os.path.isfile(ref_img) or not os.path.isfile(ref_audio):
         return "Error: File not found", None
@@ -26,6 +26,7 @@ def generate_video(ref_img, ref_audio, setting_steps=40, setting_cfg=3.5, settin
             "--source_image", ref_img,
             "--driving_audio", ref_audio,
             "--output", output_video,
+            "--face_expand_ratio", str(settings_face_expand_ratio),
             "--setting_steps", str(setting_steps),
             "--setting_cfg", str(setting_cfg),
             "--settings_seed", str(settings_seed),
@@ -73,6 +74,7 @@ with gr.Blocks() as demo:
             ref_img = gr.Image(label="Reference Image", type="filepath")
             ref_audio = gr.Audio(label="Audio", type="filepath")
             with gr.Accordion("Settings", open=True):
+                settings_face_expand_ratio = gr.Slider(label="Face Expand Ratio", value=1.2, minimum=0, maximum=10, step=0.01)
                 setting_steps = gr.Slider(label="Steps", value=40, minimum=1, maximum=200, step=1)
                 setting_cfg = gr.Slider(label="CFG Scale", value=3.5, minimum=0, maximum=10, step=0.01)
                 settings_seed = gr.Textbox(label="Seed", value=42)
@@ -89,7 +91,7 @@ with gr.Blocks() as demo:
             result_video = gr.Video(label="Result Video", interactive=False)
             result_btn = gr.Button(value="Generate Video")
 
-    result_btn.click(fn=generate_video, inputs=[ref_img, ref_audio, setting_steps, setting_cfg, settings_seed, settings_fps, settings_motion_pose_scale, settings_motion_face_scale, settings_motion_lip_scale, settings_n_motion_frames, settings_n_sample_frames], outputs=[result_status, result_video])
+    result_btn.click(fn=generate_video, inputs=[ref_img, ref_audio,settings_face_expand_ratio, setting_steps, setting_cfg, settings_seed, settings_fps, settings_motion_pose_scale, settings_motion_face_scale, settings_motion_lip_scale, settings_n_motion_frames, settings_n_sample_frames], outputs=[result_status, result_video])
 
 if __name__ == "__main__":
     share_url = False if "--share" not in sys.argv else True
