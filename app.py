@@ -1,3 +1,4 @@
+import sys
 import gradio as gr
 import subprocess
 from datetime import datetime
@@ -91,5 +92,8 @@ with gr.Blocks() as demo:
     result_btn.click(fn=generate_video, inputs=[ref_img, ref_audio, setting_steps, setting_cfg, settings_seed, settings_fps, settings_motion_pose_scale, settings_motion_face_scale, settings_motion_lip_scale, settings_n_motion_frames, settings_n_sample_frames], outputs=[result_status, result_video])
 
 if __name__ == "__main__":
+    share_url = False if "--share" not in sys.argv else True
+
     demo.queue()
-    demo.launch(inbrowser=True,share=True)
+    demo.launch(inbrowser=True, share=share_url)
+
