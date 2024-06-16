@@ -6,6 +6,8 @@ Unfortunately, I was unable to create a free tier Colab notebook as there is not
 
 But you can try if you have `pro` [colab](https://colab.research.google.com/drive/1JGkftvdEksrhJbeAUnnRAZNAfZyGjP44?usp=sharing)
 
+If you have windows and you don't want to bother with installing biblioteks, you can download the [portable version](https://huggingface.co/daswer123/portable_webuis/resolve/main/hallo-portable.zip?download=true)
+
 This fork was created to provide a convenient web interface for using Hallo. The original code has been slightly modified to allow for more control over the generation process.
 
 ![image](https://github.com/daswer123/hallo-webui/assets/22278673/ebd9c9cd-9d37-4772-8d7c-edaf68dbe15b)
