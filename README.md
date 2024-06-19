@@ -19,6 +19,14 @@ If you have windows and you don't want to bother with installing libs, you can d
 
 ## Installation
 
+### Docker
+
+```bash
+docker compose up -d 
+```
+this will start the gradio web ui and expose the port 7680 which is mapped to 8020 to teh container's host
+The app will be available at http://localhost:8020
+
 ### Windows
 
 1. Clone this repository:
