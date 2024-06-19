@@ -27,6 +27,8 @@ docker compose up -d
 this will start the gradio web ui and expose the port 7680 which is mapped to 8020 to teh container's host
 The app will be available at http://localhost:8020
 
+Note : Be sure to use the correct cuda start image for your GPU driver version, if it doesn't build from the start.
+
 ### Windows
 
 1. Clone this repository:
